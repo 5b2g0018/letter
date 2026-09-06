@@ -7,7 +7,7 @@
     <meta name="description" content="給映瑄的特別專屬互動信件！包含 TWICE Be as ONE 經典音樂與拍立得回憶照片。">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
 
@@ -49,48 +49,100 @@
             <source src="Be_as_ONE.mp4" type="audio/mpeg">
         </audio>
 
-        <!-- Central 3D Envelope Stage -->
-        <main class="stage-3d">
-            <div id="envelope-wrapper" class="envelope-wrapper" onclick="openEnvelope(event)">
-                <div class="envelope">
-                    <!-- Envelope Backing -->
-                    <div class="envelope-back"></div>
+        <!-- Central 3D Envelope Stage (Trilogy of 3 Envelopes) -->
+        <main class="stage-3d-trilogy">
+            <div class="trilogy-header">
+                <h1 class="trilogy-title">給 映瑄 的三封特別信件 💌</h1>
+                <p class="trilogy-subtitle">點擊信封解鎖每一章節的故事與專屬驚喜 ✨</p>
+            </div>
 
-                    <!-- Envelope Fold Flaps -->
-                    <div class="flap-left"></div>
-                    <div class="flap-right"></div>
-                    <div class="flap-bottom"></div>
-                    <div id="flap-top" class="flap-top"></div>
-
-                    <!-- TWICE Wax Seal Button -->
-                    <div id="wax-seal" class="wax-seal" title="點擊開啟信件">
-                        <div class="wax-seal-inner">
-                            <span>TWICE</span>
+            <div class="envelopes-grid">
+                <!-- Envelope 1: 初遇 -->
+                <div id="envelope-wrapper-1" class="envelope-wrapper envelope-theme-pink" onclick="openChapter(1, event)">
+                    <div class="chapter-pill">① 初遇 🌸</div>
+                    <div class="envelope">
+                        <div class="envelope-back"></div>
+                        <div class="flap-left"></div>
+                        <div class="flap-right"></div>
+                        <div class="flap-bottom"></div>
+                        <div class="flap-top"></div>
+                        <div class="wax-seal" title="點擊開啟第一封信：初遇">
+                            <div class="wax-seal-inner">
+                                <span>初遇</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- Envelope Cover Header Content (Positioned cleanly below Wax Seal) -->
-                    <div id="cover-text" class="cover-text">
-                        <h2 class="cover-recipient-title">給 <span id="cover-recipient-name">映瑄</span> 的一封信 💌</h2>
-                        <p class="cover-subtitle">點擊信封解鎖專屬驚喜 ✨</p>
+                        <div class="cover-text">
+                            <h2 class="cover-recipient-title">第一封：初遇 🌸</h2>
+                            <p class="cover-subtitle">故事開始的地方 ✨</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Open Prompt Tag -->
-                <div class="open-prompt-tag">
-                    ✨ 點擊信封開啟專屬驚喜 💌
+                <!-- Envelope 2: 回憶 -->
+                <div id="envelope-wrapper-2" class="envelope-wrapper envelope-theme-purple" onclick="openChapter(2, event)">
+                    <div class="chapter-pill">② 回憶 💫</div>
+                    <div class="envelope">
+                        <div class="envelope-back"></div>
+                        <div class="flap-left"></div>
+                        <div class="flap-right"></div>
+                        <div class="flap-bottom"></div>
+                        <div class="flap-top"></div>
+                        <div class="wax-seal" title="點擊開啟第二封信：回憶">
+                            <div class="wax-seal-inner">
+                                <span>回憶</span>
+                            </div>
+                        </div>
+                        <div class="cover-text">
+                            <h2 class="cover-recipient-title">第二封：回憶 💫</h2>
+                            <p class="cover-subtitle">點點滴滴珍貴時光 ✨</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Envelope 3: 心意 (Lovelys Special) -->
+                <div id="envelope-wrapper-3" class="envelope-wrapper envelope-theme-blue" onclick="openChapter(3, event)">
+                    <div class="chapter-pill">③ 心意 💌</div>
+                    <div class="envelope">
+                        <div class="envelope-back"></div>
+                        <div class="flap-left"></div>
+                        <div class="flap-right"></div>
+                        <div class="flap-bottom"></div>
+                        <div class="flap-top"></div>
+                        <div class="wax-seal" title="點擊開啟第三封信：心意">
+                            <div class="wax-seal-inner">
+                                <span>TWICE</span>
+                            </div>
+                        </div>
+                        <div class="cover-text">
+                            <h2 class="cover-recipient-title">第三封：給映瑄 💌</h2>
+                            <p class="cover-subtitle">專屬心意與 Lovelys 祝福 ✨</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
 
-        <!-- The Letter Card (Standalone Modal Window) -->
+        <!-- The Letter Card (Standalone Modal Window with Chapter Tabs) -->
         <article id="letter-paper" class="letter-paper-modal">
             <button id="close-letter-btn" class="close-letter-btn" title="關閉信件" onclick="closeEnvelope()">&times;</button>
             
+            <!-- Top Chapter Navigation Tabs inside Modal -->
+            <nav class="chapter-nav-bar">
+                <button class="chapter-tab-btn" id="tab-btn-1" onclick="switchChapter(1)">
+                    <span class="tab-icon">🌸</span> 第一封：初遇
+                </button>
+                <button class="chapter-tab-btn" id="tab-btn-2" onclick="switchChapter(2)">
+                    <span class="tab-icon">💫</span> 第二封：回憶
+                </button>
+                <button class="chapter-tab-btn" id="tab-btn-3" onclick="switchChapter(3)">
+                    <span class="tab-icon">💌</span> 第三封：心意
+                </button>
+            </nav>
+
             <div class="letter-inner-content">
                 <!-- Header with Title & Stamps -->
                 <div class="letter-header-decor">
-                    <div class="badge-tag">
+                    <div id="badge-tag" class="badge-tag">
                         💙 TZUYU LOVELY LETTER
                     </div>
                     <div id="letter-stamps" class="letter-stamps">
@@ -105,9 +157,7 @@
 
                 <!-- Letter Body Message -->
                 <div id="letter-body-text" class="letter-body">
-展信快樂！這是一封特別為妳製作的專屬互動信件 ✨。
-
-祝妳每天都能像 TWICE 的歌一樣充滿能量，遇到的所有程式碼都不卡 bug，要一直保持笑口常開喔！狂熱女團魂不滅 🍭💙！
+                    <!-- Populated dynamically per chapter -->
                 </div>
 
                 <!-- Polaroid Photo Memory Section -->
@@ -125,7 +175,7 @@
                 </div>
 
                 <!-- Interactive Lovelys Bar Inside Letter -->
-                <div class="letter-lovelys-footer-bar">
+                <div id="lovelys-footer-bar" class="letter-lovelys-footer-bar">
                     <span class="bar-hint">
                         點擊下方 TWICE Lovely 給你特別祝福與愛心雨 🌸
                     </span>
@@ -145,7 +195,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="lovelys.js?v=2"></script>
-    <script src="app.js?v=2"></script>
+    <script src="lovelys.js?v=3"></script>
+    <script src="app.js?v=3"></script>
 </body>
 </html>

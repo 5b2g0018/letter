@@ -1,26 +1,50 @@
 /**
- * TWICE Interactive Letter Application Logic
+ * TWICE Interactive Letter Application Logic - 3 Chapters Edition
  * Customized for 映瑄 from 松鼠 🐿️
- * Pure Interactive Letter - Pre-configured Direct Sharing Version.
  */
 
-// Global State (Pre-written Content)
-const state = {
-    isOpened: false,
-    bgmEnabled: false,
-    recipient: '映瑄',
-    message: '展信快樂！這是一封特別為妳製作的專屬互動信件 ✨。\n\n祝妳每天都能像 TWICE 的歌一樣充滿能量，遇到的所有程式碼都不卡 bug，要一直保持笑口常開喔！狂熱女團魂不滅 🍭💙！',
-    sender: '松鼠 🐿️',
-    date: '2026.09.05',
-    photoUrl: 'https://zeekmagazine.com/wp-content/uploads/2025/09/1758345362-a18c6653ff456bdab53dfefd9d513967.jpg',
-    photoCaption: 'Be as ONE ✨ TWICE 💙'
+let currentChapter = 1;
+
+const CHAPTERS = {
+    1: {
+        id: 1,
+        badge: '🌸 CHAPTER 1: FIRST ENCOUNTER',
+        recipient: '映瑄',
+        message: `還記得我們第一次認識與對話的時候，感覺就像在播放 TWICE 的旋律一樣特別與美好 ✨。\n\n那時的第一印象，就覺得妳是一個非常好相處又充滿能量的女孩！這第一封信記錄著我們故事的起點，很高興能與妳相遇 🌸💙。`,
+        photoUrl: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop',
+        photoCaption: '初次相遇 ✨ 故事的開端 🌸',
+        date: '2026.09.05',
+        sender: '松鼠 🐿️',
+        showLovelys: false
+    },
+    2: {
+        id: 2,
+        badge: '💫 CHAPTER 2: PRECIOUS MEMORIES',
+        recipient: '映瑄',
+        message: `時間過得真快，回想起來我們一起聊過的許多話題、一起分享的生活點滴，每一刻都非常珍貴 ✨。\n\n不管是聊 TWICE 的音樂、日常生活中的趣事，還是互相分享心事與加油打氣，這些回憶都讓日子變得更加溫暖且充滿動力 🎶🌟！`,
+        photoUrl: 'https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=80&w=800&auto=format&fit=crop',
+        photoCaption: '珍貴回憶 ✨ 點點滴滴的溫暖 💫',
+        date: '2026.09.05',
+        sender: '松鼠 🐿️',
+        showLovelys: false
+    },
+    3: {
+        id: 3,
+        badge: '💙 CHAPTER 3: SPECIAL LETTER',
+        recipient: '映瑄',
+        message: `展信快樂！這是一封特別為妳製作的專屬互動信件 ✨。\n\n祝妳每天都能像 TWICE 的歌一樣充滿能量，遇到的所有程式碼都不卡 bug，要一直保持笑口常開喔！狂熱女團魂不滅 🍭💙！`,
+        photoUrl: 'https://zeekmagazine.com/wp-content/uploads/2025/09/1758345362-a18c6653ff456bdab53dfefd9d513967.jpg',
+        photoCaption: 'Be as ONE ✨ TWICE 💙',
+        date: '2026.09.05',
+        sender: '松鼠 🐿️',
+        showLovelys: true
+    }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     initParticleEngine();
     initBeAsOneAudio();
     parseURLParameters();
-    initEnvelopeEvents();
     initInnerLetterDecorations();
 });
 
@@ -129,7 +153,7 @@ function animateParticles(timestamp) {
 }
 
 /* ==========================================================================
-   2. TWICE "Be as ONE" AUDIO PLAYER (Manual Toggle Only)
+   2. TWICE "Be as ONE" AUDIO PLAYER
    ========================================================================== */
 let isBgmPlaying = false;
 
@@ -191,30 +215,26 @@ function playPopSound() {
 }
 
 /* ==========================================================================
-   3. BULLETPROOF OPEN/CLOSE ENVELOPE CONTROLLER (No Music Auto-Play)
+   3. TRILOGY ENVELOPE OPEN & CHAPTER SWITCHER CONTROLLER
    ========================================================================== */
-function initEnvelopeEvents() {
-    const wrapper = document.getElementById('envelope-wrapper');
-    const seal = document.getElementById('wax-seal');
-
-    if (wrapper) {
-        wrapper.addEventListener('click', (e) => {
-            openEnvelope(e);
-        });
-    }
-
-    if (seal) {
-        seal.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openEnvelope(e);
-        });
-    }
-}
-
-function openEnvelope(e) {
+function openChapter(chId, e) {
     if (e) e.stopPropagation();
+    currentChapter = chId;
 
-    const wrapper = document.getElementById('envelope-wrapper');
+    // Toggle opened state on specific envelope wrapper
+    [1, 2, 3].forEach(id => {
+        const wrap = document.getElementById(`envelope-wrapper-${id}`);
+        if (wrap) {
+            if (id === chId) {
+                wrap.classList.add('opened');
+            } else {
+                wrap.classList.remove('opened');
+            }
+        }
+    });
+
+    switchChapter(chId, false);
+
     const paperModal = document.getElementById('letter-paper');
     const overlay = document.getElementById('modal-overlay');
 
@@ -225,16 +245,69 @@ function openEnvelope(e) {
         spawnBurst(clickX, clickY, 25);
     } catch (err) {}
 
-    // NOTE: Automatic music autoplay removed as requested by user.
-    // Recipient can manually click top music button if desired.
-
-    if (wrapper) wrapper.classList.add('opened');
     if (overlay) overlay.classList.add('active');
     if (paperModal) paperModal.classList.add('active');
 }
 
+function switchChapter(chId, playAudio = true) {
+    currentChapter = chId;
+    const data = CHAPTERS[chId] || CHAPTERS[3];
+
+    // Update Tab buttons active state
+    [1, 2, 3].forEach(id => {
+        const btn = document.getElementById(`tab-btn-${id}`);
+        if (btn) {
+            if (id === chId) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
+    });
+
+    if (playAudio) {
+        playPopSound();
+        spawnBurst(window.innerWidth / 2, window.innerHeight / 3, 15);
+    }
+
+    // Update Content
+    const badge = document.getElementById('badge-tag');
+    if (badge) badge.textContent = data.badge;
+
+    const recipient = document.getElementById('letter-recipient-text');
+    if (recipient) recipient.textContent = data.recipient;
+
+    const body = document.getElementById('letter-body-text');
+    if (body) body.textContent = data.message;
+
+    const img = document.getElementById('polaroid-img');
+    if (img) img.src = data.photoUrl;
+
+    const caption = document.getElementById('polaroid-caption');
+    if (caption) caption.textContent = data.photoCaption;
+
+    const date = document.getElementById('letter-date-text');
+    if (date) date.textContent = data.date;
+
+    const sender = document.getElementById('letter-sender-text');
+    if (sender) sender.textContent = data.sender;
+
+    // Toggle Lovelys bar (Shown on Chapter 3)
+    const lovelysBar = document.getElementById('lovelys-footer-bar');
+    if (lovelysBar) {
+        if (data.showLovelys) {
+            lovelysBar.style.display = 'flex';
+        } else {
+            lovelysBar.style.display = 'none';
+        }
+    }
+}
+
+function openEnvelope(e) {
+    openChapter(3, e);
+}
+
 function closeEnvelope() {
-    const wrapper = document.getElementById('envelope-wrapper');
     const paperModal = document.getElementById('letter-paper');
     const overlay = document.getElementById('modal-overlay');
 
@@ -242,7 +315,10 @@ function closeEnvelope() {
     if (overlay) overlay.classList.remove('active');
 
     setTimeout(() => {
-        if (wrapper) wrapper.classList.remove('opened');
+        [1, 2, 3].forEach(id => {
+            const wrap = document.getElementById(`envelope-wrapper-${id}`);
+            if (wrap) wrap.classList.remove('opened');
+        });
     }, 250);
 }
 
@@ -309,35 +385,16 @@ function createLovelyClickableIcon(lovely) {
    ========================================================================== */
 function parseURLParameters() {
     const params = new URLSearchParams(window.location.search);
-    if (params.has('to')) state.recipient = params.get('to');
-    if (params.has('msg')) state.message = params.get('msg');
-    if (params.has('from')) state.sender = params.get('from');
-    if (params.has('date')) state.date = params.get('date');
-    if (params.has('photo')) state.photoUrl = params.get('photo');
-
-    updateLetterUI();
-}
-
-function updateLetterUI() {
-    const coverName = document.getElementById('cover-recipient-name');
-    if (coverName) coverName.textContent = state.recipient;
-
-    const recipientText = document.getElementById('letter-recipient-text');
-    if (recipientText) recipientText.textContent = state.recipient;
-
-    const bodyText = document.getElementById('letter-body-text');
-    if (bodyText) bodyText.textContent = state.message;
-
-    const senderText = document.getElementById('letter-sender-text');
-    if (senderText) senderText.textContent = state.sender;
-
-    const dateText = document.getElementById('letter-date-text');
-    if (dateText) dateText.textContent = state.date;
-
-    const img = document.getElementById('polaroid-img');
-    if (img && state.photoUrl) {
-        img.src = state.photoUrl;
+    if (params.has('to')) {
+        const rec = params.get('to');
+        Object.values(CHAPTERS).forEach(ch => ch.recipient = rec);
     }
+    if (params.has('from')) {
+        const snd = params.get('from');
+        Object.values(CHAPTERS).forEach(ch => ch.sender = snd);
+    }
+
+    switchChapter(1, false);
 }
 
 /* Toast Helper */
@@ -354,3 +411,4 @@ function showToast(message) {
         toast.classList.remove('show');
     }, 3500);
 }
+

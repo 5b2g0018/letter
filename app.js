@@ -10,6 +10,7 @@ const CHAPTERS = {
         id: 1,
         badge: '🌸 FIRST ENCOUNTER',
         recipient: '巧克力',
+        stamps: [LOVELYS[0], LOVELYS[1]],
         message: `四個月前，我們第一次在群組裡相遇。當時我們對彼此完全不熟悉，我其實也不太敢在群裡開口說話\n\n直到某次群組通話，不知道我哪來的勇氣，竟然就這樣加了妳的哀居！不過當時加了之後，我們也沒有因此變得比較熟（哈哈哈\n\n後來無意間在脆上刷到妳的貼文，大概是梁靜茹給了我勇氣吧，我第一次在脆上留言就是回妳！當時我說：「妳看起來好高興冷、感覺應該滿難聊的。」結果妳竟然回我：「還不快來跟我聊天。」\n\n於是我又又又不知道哪來的勇氣，竟然真的跑去私訊妳了！從那之後，我們好像就變得越來越熟悉彼此\n\n真的很高興能認識妳，巧克力！🍫✨`,
         photoUrl: 'images/九宮格.jpg',
         photoCaption: '初次相遇 ✨ 故事的開端 🌸',
@@ -21,6 +22,7 @@ const CHAPTERS = {
         id: 2,
         badge: '💫 FAMILIARITY',
         recipient: '巧克力',
+        stamps: [LOVELYS[2], LOVELYS[6]],
         message: `九兔讓我們相遇，或許從我把薯條的文打成你的文那一刻開始，就已經注定了我們會認識。
 
 這幾個月最開心的事情之一，就是能夠認識你們、認識妳。其實以前的我，是一個從來不太會在網路上跟別人社交的人，也很少主動去認識陌生人。可是也不知道為什麼，遇到你們之後，好像就慢慢變得不一樣了。
@@ -53,7 +55,8 @@ const CHAPTERS = {
     3: {
         id: 3,
         badge: '🎂 BIRTHDAY CARDS',
-        recipient: '巧克力',
+        recipient: '유진（YUZHEN）',
+        stamps: [LOVELYS[0], LOVELYS[8]],
         message: `哥（松鼠、蛋黃哥）先恭喜你又長大一歲啦～🎂
 解鎖17歲的人生！希望你在今年的每一天都可以開開心心的，也要記得好好照顧自己。
 
@@ -423,6 +426,9 @@ function switchChapter(chId, playAudio = true) {
     const sender = document.getElementById('letter-sender-text');
     if (sender) sender.textContent = data.sender;
 
+    // Update Stamps (Top Right of Letter)
+    updateLetterStamps(data.stamps);
+
     // Toggle Lovelys bar (Shown on Chapter 3)
     const lovelysBar = document.getElementById('lovelys-footer-bar');
     if (lovelysBar) {
@@ -432,6 +438,20 @@ function switchChapter(chId, playAudio = true) {
             lovelysBar.style.display = 'none';
         }
     }
+}
+
+function updateLetterStamps(stampList) {
+    const stamps = document.getElementById('letter-stamps');
+    if (!stamps || typeof LOVELYS === 'undefined') return;
+
+    stamps.innerHTML = '';
+    const listToRender = stampList || [LOVELYS[0], LOVELYS[1]];
+    listToRender.forEach(lovely => {
+        const stamp = document.createElement('div');
+        stamp.className = 'mini-lovely-stamp';
+        stamp.innerHTML = createLovelyHTML(lovely, { size: 36 });
+        stamps.appendChild(stamp);
+    });
 }
 
 function openEnvelope(e) {
@@ -457,20 +477,12 @@ function closeEnvelope() {
    4. INNER LETTER DECORATIONS & STAMPS
    ========================================================================== */
 function initInnerLetterDecorations() {
-    const stamps = document.getElementById('letter-stamps');
+    const data = CHAPTERS[currentChapter] || CHAPTERS[1];
+    updateLetterStamps(data ? data.stamps : null);
+
     const innerList = document.getElementById('inner-lovelys-list');
 
     if (typeof LOVELYS === 'undefined') return;
-
-    if (stamps) {
-        stamps.innerHTML = '';
-        [LOVELYS[0], LOVELYS[1]].forEach(lovely => {
-            const stamp = document.createElement('div');
-            stamp.className = 'mini-lovely-stamp';
-            stamp.innerHTML = createLovelyHTML(lovely, { size: 36 });
-            stamps.appendChild(stamp);
-        });
-    }
 
     if (innerList) {
         innerList.innerHTML = '';

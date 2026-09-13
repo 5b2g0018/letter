@@ -35,7 +35,7 @@
     --font-heading: 'Outfit', 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
     --font-handwriting: 'Caveat', 'Dancing Script', 'Kalam', cursive;
     --font-body: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
-    --font-letter: 'Zen Maru Gothic', 'Noto Serif TC', 'Noto Sans TC', sans-serif;
+    --font-letter: 'DFKai-SB', 'BiauKai', '標楷體', 'AR PL UKai TW', 'Kaiti', serif;
 }
 
 /* Reset & Base */
@@ -686,8 +686,8 @@ html, body {
 }
 
 .letter-sender {
-    font-family: var(--font-handwriting), var(--font-letter);
-    font-size: 1.55rem;
+    font-family: var(--font-letter);
+    font-size: 1.4rem;
     color: #0284C7;
     font-weight: 700;
 }

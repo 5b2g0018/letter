@@ -11,7 +11,7 @@ const LOVELYS = [
         name: 'NAVELY',
         color: '#52C5ED', // Sky Blue
         image: 'images/1.jpg',
-        quote: '要像爆米花一樣開心每一天喔！🐰💕',
+        quote: '今天也要充滿活力地出發！像爆米花一樣炸開所有壓力，妳是最棒的，加油！🐰💥💖',
         desc: '天真活潑的粉藍 NAVELY！'
     },
     {
@@ -20,7 +20,7 @@ const LOVELYS = [
         name: 'JEONGVELY',
         color: '#A2DC48', // Lime Green
         image: 'images/2.webp',
-        quote: '今天也要好好吃飯、維持乾淨好心情！💚✨',
+        quote: '累的時候別硬撐，記得好好吃飯、好好休息。有我在，隨時給妳最暖的擁抱！💚✨',
         desc: '喜愛乾淨與貼心的 JEONGVELY！'
     },
     {
@@ -29,7 +29,7 @@ const LOVELYS = [
         name: 'MOVELY',
         color: '#FF6B9D', // Hot Pink
         image: 'images/3.jpg',
-        quote: '最喜歡跳舞了！跟著 Be as ONE 音樂一起感動吧！💖🎀',
+        quote: '遇到困難就先吃頓好吃的！只要不放棄、跟著自己的節奏走，妳一定可以做到！💖🍖✨',
         desc: '熱情奔放的 MOVELY！'
     },
     {
@@ -38,7 +38,7 @@ const LOVELYS = [
         name: 'SAVELY',
         color: '#9F7AEA', // Purple
         image: 'images/4.jpg',
-        quote: '天真爛漫！Shy Shy Shy~ 祝福映瑄天天開心 💜',
+        quote: '今天也辛苦囉～無論發生什麼事，我都會一直在妳身邊幫妳加油！No Sana No Life！💜🫂✨',
         desc: '天真爛漫又甜美的 SAVELY！'
     },
     {
@@ -47,7 +47,7 @@ const LOVELYS = [
         name: 'JIVELY',
         color: '#F6AD55', // Warm Yellow
         image: 'images/5.jpg',
-        quote: '最喜歡唱歌了！像太陽一樣自信閃耀吧！💛🎤',
+        quote: '拿出 100% 的熱情向前衝吧！相信自己的力量，妳比自己想像的還要強大！☀️🧡🔥',
         desc: '充滿歌聲熱情的 JIVELY！'
     },
     {
@@ -56,7 +56,7 @@ const LOVELYS = [
         name: 'MIVELY',
         color: '#4FD1C5', // Mint Teal
         image: 'images/6.webp',
-        quote: '默默努力家～願這首 Be as ONE 帶給妳平靜與溫暖 💙 Swan',
+        quote: '放慢腳步也沒關係的，按照妳自己的步調往前走就好。累了隨時來我這裡休息吧…🐧💚✨',
         desc: '默默努力又溫柔的 MIVELY！'
     },
     {
@@ -65,7 +65,7 @@ const LOVELYS = [
         name: 'DAVELY',
         color: '#E2E8F0', // Off-White
         image: 'images/7.jpg',
-        quote: '氣氛帶動隊長！找到對著鏡頭微笑的映瑄囉～🤍📸',
+        quote: '捕捉到正在努力的妳了！📸 記得隨時保持燦爛的笑容，好運很快就會降臨囉！🤍✨',
         desc: '氣氛帶動隊長 DAVELY！'
     },
     {
@@ -74,7 +74,7 @@ const LOVELYS = [
         name: 'CHAENGVELY',
         color: '#E53E3E', // Crimson Red
         image: 'images/8.webp',
-        quote: '最喜歡草莓了！保持妳的無限創意與獨一無二～❤️🍓',
+        quote: '勇敢去做妳想做的事吧！妳的獨一無二就是最棒的武器，畫出屬於妳的色彩！🔴🎨✨',
         desc: '藝術靈魂小草莓 CHAENGVELY！'
     },
     {
@@ -83,7 +83,7 @@ const LOVELYS = [
         name: 'TZUVELY',
         color: '#1A56DB', // Deep Royal Blue
         image: 'images/9.jpg',
-        quote: '給映瑄最好的祝福！遇到所有 Code 都不卡 Bug，Be as ONE 💙🍞',
+        quote: '雖然過程可能很辛苦，但只要一步一步穩定前進就好。要照顧好自己，妳一直都很棒喔！💙🐶✨',
         desc: '追求完美的 TZUVELY！'
     }
 ];

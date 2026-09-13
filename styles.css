@@ -1,9 +1,9 @@
 /* ==========================================================================
    TWICE Interactive Letter - Modern & Ultra-Performance Stylesheet
-   Special Edition for 映瑄 from 松鼠 🐿️
+   Special Edition for 巧克力 from 松鼠 🐿️
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Kalam:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;600;700&family=Outfit:wght@400;600;700;800&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 
 :root {
     /* TWICE Official Lovely Colors */
@@ -32,9 +32,10 @@
     --shadow-paper: 0 20px 50px rgba(2, 132, 199, 0.3);
 
     /* Fonts */
-    --font-heading: 'Outfit', 'Noto Sans TC', sans-serif;
-    --font-handwriting: 'Dancing Script', 'Noto Sans TC', cursive;
-    --font-body: 'Noto Sans TC', sans-serif;
+    --font-heading: 'Outfit', 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
+    --font-handwriting: 'Caveat', 'Dancing Script', 'Kalam', cursive;
+    --font-body: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
+    --font-letter: 'Zen Maru Gothic', 'Noto Serif TC', 'Noto Sans TC', sans-serif;
 }
 
 /* Reset & Base */
@@ -295,7 +296,7 @@ html, body {
     box-shadow: 0 6px 18px rgba(159, 122, 234, 0.6);
 }
 
-/* Theme 3: Blue (心意) */
+/* Theme 3: Blue (Birthday cards) */
 .envelope-theme-blue .envelope {
     background: linear-gradient(135deg, #38BDF8 0%, #2563EB 50%, #06B6D4 100%);
     box-shadow: 0 14px 35px rgba(14, 165, 233, 0.4);
@@ -408,7 +409,7 @@ html, body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Cover Text Header (Moved DOWN below Wax Seal so "給 映瑄 的一封信" is 100% unobscured!) */
+/* Cover Text Header (Moved DOWN below Wax Seal so "給 巧克力 的一封信" is 100% unobscured!) */
 .cover-text {
     position: absolute;
     bottom: 22px;
@@ -599,19 +600,22 @@ html, body {
 }
 
 .letter-recipient {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 800;
+    font-family: var(--font-letter);
+    font-size: 1.35rem;
+    font-weight: 700;
     color: #0369A1;
+    letter-spacing: 0.02em;
 }
 
 .letter-body {
-    font-family: var(--font-body);
-    font-size: 1.02rem;
-    line-height: 1.85;
-    color: #334155;
+    font-family: var(--font-letter);
+    font-size: 1.08rem;
+    line-height: 1.95;
+    letter-spacing: 0.03em;
+    color: #1E293B;
     white-space: pre-wrap;
     min-height: 110px;
+    font-weight: 500;
 }
 
 .polaroid-container {
@@ -660,7 +664,7 @@ html, body {
     margin-top: 8px;
     text-align: center;
     font-family: var(--font-handwriting);
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     color: #0284C7;
     font-weight: 700;
 }
@@ -675,14 +679,15 @@ html, body {
 }
 
 .letter-date {
-    font-size: 0.85rem;
+    font-family: var(--font-letter);
+    font-size: 0.88rem;
     color: #94A3B8;
     font-weight: 600;
 }
 
 .letter-sender {
-    font-family: var(--font-handwriting);
-    font-size: 1.45rem;
+    font-family: var(--font-handwriting), var(--font-letter);
+    font-size: 1.55rem;
     color: #0284C7;
     font-weight: 700;
 }

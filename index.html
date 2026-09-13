@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,11 +10,12 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=3">
 </head>
+
 <body>
 
     <!-- Main App Container -->
     <div id="app-container">
-        
+
         <!-- Canvas for Heart & Sparkle Particle Engine -->
         <canvas id="particles-canvas"></canvas>
 
@@ -52,13 +54,14 @@
         <!-- Central 3D Envelope Stage (Trilogy of 3 Envelopes) -->
         <main class="stage-3d-trilogy">
             <div class="trilogy-header">
-                <h1 class="trilogy-title">給 巧克力 的三封特別信件 💌</h1>
+                <h1 class="trilogy-title">給유진（YUZHEN）的三封特別信件 💌</h1>
                 <p class="trilogy-subtitle">點擊信封解鎖每一章節的故事與專屬驚喜 ✨</p>
             </div>
 
             <div class="envelopes-grid">
                 <!-- Envelope 1: 初遇 -->
-                <div id="envelope-wrapper-1" class="envelope-wrapper envelope-theme-pink" onclick="openChapter(1, event)">
+                <div id="envelope-wrapper-1" class="envelope-wrapper envelope-theme-pink"
+                    onclick="openChapter(1, event)">
                     <div class="chapter-pill">① 初遇 🌸</div>
                     <div class="envelope">
                         <div class="envelope-back"></div>
@@ -79,28 +82,30 @@
                 </div>
 
                 <!-- Envelope 2: 回憶 -->
-                <div id="envelope-wrapper-2" class="envelope-wrapper envelope-theme-purple" onclick="openChapter(2, event)">
-                    <div class="chapter-pill">② 回憶 💫</div>
+                <div id="envelope-wrapper-2" class="envelope-wrapper envelope-theme-purple"
+                    onclick="openChapter(2, event)">
+                    <div class="chapter-pill">② 熟悉 💫</div>
                     <div class="envelope">
                         <div class="envelope-back"></div>
                         <div class="flap-left"></div>
                         <div class="flap-right"></div>
                         <div class="flap-bottom"></div>
                         <div class="flap-top"></div>
-                        <div class="wax-seal" title="點擊開啟第二封信：回憶">
+                        <div class="wax-seal" title="點擊開啟第二封信：熟悉">
                             <div class="wax-seal-inner">
-                                <span>回憶</span>
+                                <span>熟悉</span>
                             </div>
                         </div>
                         <div class="cover-text">
-                            <h2 class="cover-recipient-title">第二封：回憶 💫</h2>
+                            <h2 class="cover-recipient-title">第二封：熟悉 💫</h2>
                             <p class="cover-subtitle">點點滴滴珍貴時光 ✨</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Envelope 3: Birthday cards (Lovelys Special) -->
-                <div id="envelope-wrapper-3" class="envelope-wrapper envelope-theme-blue" onclick="openChapter(3, event)">
+                <div id="envelope-wrapper-3" class="envelope-wrapper envelope-theme-blue"
+                    onclick="openChapter(3, event)">
                     <div class="chapter-pill">③ Birthday cards 💌</div>
                     <div class="envelope">
                         <div class="envelope-back"></div>
@@ -124,15 +129,16 @@
 
         <!-- The Letter Card (Standalone Modal Window with Chapter Tabs) -->
         <article id="letter-paper" class="letter-paper-modal">
-            <button id="close-letter-btn" class="close-letter-btn" title="關閉信件" onclick="closeEnvelope()">&times;</button>
-            
+            <button id="close-letter-btn" class="close-letter-btn" title="關閉信件"
+                onclick="closeEnvelope()">&times;</button>
+
             <!-- Top Chapter Navigation Tabs inside Modal -->
             <nav class="chapter-nav-bar">
                 <button class="chapter-tab-btn" id="tab-btn-1" onclick="switchChapter(1)">
                     <span class="tab-icon">🌸</span> 第一封：初遇
                 </button>
                 <button class="chapter-tab-btn" id="tab-btn-2" onclick="switchChapter(2)">
-                    <span class="tab-icon">💫</span> 第二封：回憶
+                    <span class="tab-icon">💫</span> 第二封：熟悉
                 </button>
                 <button class="chapter-tab-btn" id="tab-btn-3" onclick="switchChapter(3)">
                     <span class="tab-icon">🎂</span> 第三封：Birthday cards
@@ -152,7 +158,7 @@
 
                 <!-- Recipient Line -->
                 <div class="letter-recipient">
-                    Dear <span id="letter-recipient-text">巧克力</span> 👋，
+                    To: <span id="letter-recipient-text">巧克力</span> 👋，
                 </div>
 
                 <!-- Letter Body Message -->
@@ -162,7 +168,9 @@
 
                 <!-- Polaroid Photo Memory Section -->
                 <div id="polaroid-frame" class="polaroid-container">
-                    <img id="polaroid-img" class="polaroid-img" src="https://zeekmagazine.com/wp-content/uploads/2025/09/1758345362-a18c6653ff456bdab53dfefd9d513967.jpg" alt="Special Memory Photo">
+                    <img id="polaroid-img" class="polaroid-img"
+                        src="https://zeekmagazine.com/wp-content/uploads/2025/09/1758345362-a18c6653ff456bdab53dfefd9d513967.jpg"
+                        alt="Special Memory Photo">
                     <div id="polaroid-caption" class="polaroid-caption">Be as ONE ✨ TWICE 💙</div>
                 </div>
 
@@ -211,4 +219,5 @@
     <script src="lovelys.js?v=3"></script>
     <script src="app.js?v=3"></script>
 </body>
+
 </html>

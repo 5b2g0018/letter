@@ -54,7 +54,7 @@ const CHAPTERS = {
         id: 3,
         badge: '🎂 BIRTHDAY CARDS',
         recipient: '유진（YUZHEN）',
-        stamps: [LOVELYS[0], LOVELYS[8]],
+        stamps: [LOVELYS[3], LOVELYS[8]],
         message: `哥（松鼠、蛋黃哥）先恭喜你又長大一歲啦～🎂
 解鎖17歲的人生！希望你在今年的每一天都可以開開心心的，也要記得好好照顧自己。
 

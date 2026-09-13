@@ -192,6 +192,19 @@
         <!-- Toast Notification Popup -->
         <div id="toast-notification" class="toast-notification"></div>
 
+        <!-- Floating Music Reminder Badge -->
+        <div class="music-hint-badge" id="music-hint-badge">
+            <span class="hint-icon">🎵</span>
+            <span class="hint-text">如果覺得音樂太吵或是太感人，可以在右上角關掉音樂喔 💖</span>
+        </div>
+
+        <!-- Image Zoom Lightbox Modal -->
+        <div id="image-lightbox" class="image-lightbox" onclick="closeImageLightbox()">
+            <button class="lightbox-close-btn" title="關閉照片" onclick="closeImageLightbox()">&times;</button>
+            <img id="lightbox-img" src="" alt="Enlarged Photo" onclick="event.stopPropagation()">
+            <div id="lightbox-caption" class="lightbox-caption" onclick="event.stopPropagation()"></div>
+        </div>
+
     </div>
 
     <!-- Scripts -->

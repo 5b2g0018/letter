@@ -9,9 +9,9 @@ const CHAPTERS = {
     1: {
         id: 1,
         badge: '🌸 CHAPTER 1: FIRST ENCOUNTER',
-        recipient: '映瑄',
-        message: `還記得我們第一次認識與對話的時候，感覺就像在播放 TWICE 的旋律一樣特別與美好 ✨。\n\n那時的第一印象，就覺得妳是一個非常好相處又充滿能量的女孩！這第一封信記錄著我們故事的起點，很高興能與妳相遇 🌸💙。`,
-        photoUrl: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop',
+        recipient: '巧克力',
+        message: `四個月前，我們第一次在群組裡相遇。當時我們對彼此完全不熟悉，我其實也不太敢在群裡開口說話\n\n直到某次群組通話，不知道我哪來的勇氣，竟然就這樣加了妳的哀居！不過當時加了之後，我們也沒有因此變得比較熟（哈哈哈\n\n後來無意間在脆上刷到妳的貼文，大概是梁靜茹給了我勇氣吧，我第一次在脆上留言就是回妳！當時我說：「妳看起來好高興冷、感覺很難聊。」結果妳竟然回我，讓我直接去跟妳聊天\n\n於是我又又又不知道哪來的勇氣，竟然真的跑去私訊妳了！從那之後，我們好像就變得越來越熟悉彼此\n\n真的很高興能認識妳，巧克力！🍫✨`,
+        photoUrl: 'images/九宮格.jpg',
         photoCaption: '初次相遇 ✨ 故事的開端 🌸',
         date: '2026.09.05',
         sender: '松鼠 🐿️',
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initBeAsOneAudio();
     parseURLParameters();
     initInnerLetterDecorations();
+    initPolaroidLightbox();
 });
 
 /* ==========================================================================
@@ -107,7 +108,7 @@ function spawnBurst(x, y, count = 25) {
                 isBurst: true
             });
         }
-    } catch (err) {}
+    } catch (err) { }
 }
 
 let lastTime = 0;
@@ -162,6 +163,41 @@ function initBeAsOneAudio() {
     if (bgmBtn) {
         bgmBtn.addEventListener('click', toggleBeAsOneAudio);
     }
+
+    // Try auto-play immediately
+    attemptAutoPlayBgm();
+
+    // Fallback: auto-start audio on first user click or touch anywhere
+    const startOnInteraction = () => {
+        if (!isBgmPlaying) {
+            attemptAutoPlayBgm();
+        }
+        window.removeEventListener('click', startOnInteraction);
+        window.removeEventListener('touchstart', startOnInteraction);
+        window.removeEventListener('pointerdown', startOnInteraction);
+    };
+
+    window.addEventListener('click', startOnInteraction);
+    window.addEventListener('touchstart', startOnInteraction);
+    window.addEventListener('pointerdown', startOnInteraction);
+}
+
+function attemptAutoPlayBgm() {
+    try {
+        const audio = document.getElementById('be-as-one-audio');
+        const bgmIcon = document.getElementById('bgm-icon');
+        const bgmText = document.getElementById('bgm-text');
+
+        if (!audio || isBgmPlaying) return;
+
+        audio.play().then(() => {
+            isBgmPlaying = true;
+            if (bgmIcon) bgmIcon.textContent = '🎶';
+            if (bgmText) bgmText.textContent = 'Be as ONE: ON';
+        }).catch(() => {
+            // Autoplay blocked by browser until user gesture
+        });
+    } catch (err) {}
 }
 
 function toggleBeAsOneAudio() {
@@ -188,7 +224,43 @@ function toggleBeAsOneAudio() {
             if (bgmText) bgmText.textContent = 'Be as ONE: OFF';
             showToast('🔇 已暫停背景音樂');
         }
-    } catch (err) {}
+    } catch (err) { }
+}
+
+/* Image Zoom Lightbox Functions */
+function initPolaroidLightbox() {
+    const frame = document.getElementById('polaroid-frame');
+    if (frame) {
+        frame.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const img = document.getElementById('polaroid-img');
+            const caption = document.getElementById('polaroid-caption');
+            if (img) {
+                openImageLightbox(img.src, caption ? caption.textContent : '');
+            }
+        });
+    }
+}
+
+function openImageLightbox(src, caption) {
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    if (!lightbox || !lightboxImg) return;
+
+    lightboxImg.src = src;
+    if (lightboxCaption) lightboxCaption.textContent = caption || '';
+
+    lightbox.classList.add('active');
+    playPopSound();
+}
+
+function closeImageLightbox() {
+    const lightbox = document.getElementById('image-lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+    }
 }
 
 function playPopSound() {
@@ -211,7 +283,7 @@ function playPopSound() {
 
         osc.start();
         osc.stop(ctx.currentTime + 0.12);
-    } catch (e) {}
+    } catch (e) { }
 }
 
 /* ==========================================================================
@@ -243,7 +315,7 @@ function openChapter(chId, e) {
         const clickX = (e && e.clientX) ? e.clientX : window.innerWidth / 2;
         const clickY = (e && e.clientY) ? e.clientY : window.innerHeight / 2;
         spawnBurst(clickX, clickY, 25);
-    } catch (err) {}
+    } catch (err) { }
 
     if (overlay) overlay.classList.add('active');
     if (paperModal) paperModal.classList.add('active');
@@ -333,7 +405,7 @@ function initInnerLetterDecorations() {
 
     if (stamps) {
         stamps.innerHTML = '';
-        [LOVELYS[8], LOVELYS[0]].forEach(lovely => {
+        [LOVELYS[0], LOVELYS[1]].forEach(lovely => {
             const stamp = document.createElement('div');
             stamp.className = 'mini-lovely-stamp';
             stamp.innerHTML = createLovelyHTML(lovely, { size: 36 });

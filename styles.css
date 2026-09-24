@@ -913,35 +913,41 @@ html, body {
 /* Floating Music Hint Badge in Main View */
 .music-hint-badge {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: rgba(15, 23, 42, 0.82);
+    bottom: max(20px, env(safe-area-inset-bottom, 20px));
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.88);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1.5px solid rgba(56, 189, 248, 0.5);
+    border: 1.5px solid rgba(56, 189, 248, 0.6);
     color: #F0F9FF;
-    padding: 10px 18px;
+    padding: 8px 18px;
     border-radius: 30px;
     font-family: var(--font-heading);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 700;
     z-index: 150;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.25);
-    animation: floatingPulse 4s infinite ease-in-out;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), 0 0 15px rgba(56, 189, 248, 0.3);
+    animation: floatingPulseCentered 4s infinite ease-in-out;
     pointer-events: auto;
+    max-width: 92vw;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
 }
 
-@keyframes floatingPulse {
+@keyframes floatingPulseCentered {
     0%, 100% {
-        transform: translateY(0);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 12px rgba(56, 189, 248, 0.2);
+        transform: translate(-50%, 0);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), 0 0 12px rgba(56, 189, 248, 0.2);
     }
     50% {
-        transform: translateY(-6px);
-        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 0 22px rgba(56, 189, 248, 0.5);
+        transform: translate(-50%, -6px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55), 0 0 22px rgba(56, 189, 248, 0.5);
     }
 }
 
@@ -1221,14 +1227,17 @@ html, body {
     }
 
     .music-hint-badge {
-        bottom: 14px;
-        right: 50%;
-        transform: translateX(50%);
-        font-size: 0.76rem;
-        padding: 8px 14px;
-        width: max-content;
-        max-width: 90vw;
+        bottom: max(14px, env(safe-area-inset-bottom, 14px));
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        font-size: 0.75rem;
+        padding: 7px 14px;
+        width: min(92vw, 360px);
+        max-width: 92vw;
         text-align: center;
-        white-space: nowrap;
+        white-space: normal;
+        line-height: 1.35;
+        border-radius: 20px;
     }
 }

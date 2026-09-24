@@ -224,22 +224,32 @@ function initBeAsOneAudio() {
         bgmBtn.addEventListener('click', toggleBeAsOneAudio);
     }
 
-    // Try auto-play immediately
+    // Try auto-play immediately on page load
     attemptAutoPlayBgm();
 
-    // Fallback: auto-start audio on first user click or touch anywhere
+    // Auto-start audio on first user click, touch, or interaction anywhere on the page
     const startOnInteraction = () => {
         if (!isBgmPlaying) {
             attemptAutoPlayBgm();
         }
-        window.removeEventListener('click', startOnInteraction);
-        window.removeEventListener('touchstart', startOnInteraction);
-        window.removeEventListener('pointerdown', startOnInteraction);
+        if (isBgmPlaying) {
+            removeListeners();
+        }
     };
 
-    window.addEventListener('click', startOnInteraction);
-    window.addEventListener('touchstart', startOnInteraction);
-    window.addEventListener('pointerdown', startOnInteraction);
+    const events = ['touchstart', 'touchend', 'pointerdown', 'mousedown', 'click', 'scroll', 'keydown', 'pageshow'];
+
+    const removeListeners = () => {
+        events.forEach(evt => {
+            window.removeEventListener(evt, startOnInteraction, true);
+            document.removeEventListener(evt, startOnInteraction, true);
+        });
+    };
+
+    events.forEach(evt => {
+        window.addEventListener(evt, startOnInteraction, { capture: true, passive: true });
+        document.addEventListener(evt, startOnInteraction, { capture: true, passive: true });
+    });
 }
 
 function attemptAutoPlayBgm() {
